@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% set active_page = "inputs" %}
+
+{% block content %}
+<section id="hero" class="services">
+    <div class="container">
+        <div class="form_wrapper">
+            <div class="form_container">
+                <div class="title_container">
+                    <h2>Dados para a análise de viabilidade</h2>
+                </div>
+                <div class="row clearfix">
+                    <div class="">
+                        <form>
+                            <div class="input_field">
+                                <h3>Dados dos eletropostos</h3>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fas fa-gas-pump"></i></span>
+                                        <input type="number" name="num_eletropostos" min="1" placeholder="Número de eletropostos - Padrão: 4" />
+                                    </div>
+                                </div>
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-bolt"></i></span>
+                                        <input type="number" min="0" name="pot_eletroposto" placeholder="Potência do eletroposto (kW)" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col_half">
+                            <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-clock"></i></span>
+                                <input type="number" min="0" name="recarga_dia" placeholder="Recarga (h/dia)" required/>
+                            </div>
+                                </div>
+                            </div>
+                            <div class="input_field">
+                                <h3>Dados do sistema fotovoltaico</h3>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-solar-panel"></i></span>
+                                        <input type="number" name="pot_fv" min="0" placeholder="Potência do sistema fotovoltaico (kW)" required />
+                                    </div>
+                                </div>
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-clock"></i></span>
+                                        <input type="number" min="0" name="h_inc" placeholder="Horas de irradiação solar média por dia" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-chart-simple"></i></span>
+                                        <input type="number" name="pr" min="0" placeholder="Performance ratio" required />
+                                    </div>
+                                </div>
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-arrow-turn-down"></i></span>
+                                        <input type="number" min="0" name="perda_eficiencia_anual" placeholder="Perda de eficiência anual do sistema (decimal)" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input_field">
+                                <h3>Dados econômicos</h3>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-dollar-sign"></i></span>
+                                        <input type="number" name="preco_eletroposto" min="0" placeholder="Preço de cada eletroposto (R$)" required />
+                                    </div>
+                                </div>
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-dollar-sign"></i></span>
+                                        <input type="number" min="0" name="preco_fv" placeholder="Preço do sistema fotovoltaico (R$/kWp)" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-dollar-sign"></i></span>
+                                        <input type="number" name="implantacao" min="0" placeholder="Outros custos de implantação (R$)" required />
+                                    </div>
+                                </div>
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-dollar-sign"></i></span>
+                                        <input type="number" min="0" name="o_e_m" placeholder="Valor da operação e manutenção por eletroposto (R$/ano)" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-dollar-sign"></i></span>
+                                        <input type="number" name="valor_recarga" min="0" placeholder="Valor da recarga (R$/kWh)" required />
+                                    </div>
+                                </div>
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-dollar-sign"></i></span>
+                                        <input type="number" min="0" name="tarifa_energia" placeholder="Valor da tarifa de energia com impostos (R$/kWh)" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-landmark"></i></span>
+                                        <input type="number" name="tma" min="0" placeholder="Taxa Mínima de Atratividade" required />
+                                    </div>
+                                </div>
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-house"></i></span>
+                                        <input type="number" min="0" name="aluguel_mes" placeholder="Aluguel (R$/mês)" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col_half">
+                                    <div class="input_field"><span><i aria-hidden="true" class="fa-solid fa-timeline"></i></span>
+                                        <input type="number" name="vida_util" min="1" placeholder="Vida útil financeira do fluxo de caixa" required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input_field radio_option">
+                                <input type="radio" name="radiogroup1" id="rd1">
+                                <label for="rd1">Male</label>
+                                <input type="radio" name="radiogroup1" id="rd2">
+                                <label for="rd2">Female</label>
+                            </div>
+                            <div class="input_field select_option">
+                                <select>
+                                    <option>Select a country</option>
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                </select>
+                                <div class="select_arrow"></div>
+                            </div>
+                            <div class="input_field checkbox_option">
+                                <input type="checkbox" id="cb1">
+                                <label for="cb1">I agree with terms and conditions</label>
+                            </div>
+                            <div class="input_field checkbox_option">
+                                <input type="checkbox" id="cb2">
+                                <label for="cb2">I want to receive the newsletter</label>
+                            </div>
+                            <input class="button" type="submit" value="Register"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

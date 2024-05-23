@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    
+  </style>
+{% endblock %}
+{% block title %}
+	IFG Finder
+{% endblock %}
+{% block cabecalho %}
+	IFG Finder
+{% endblock %}
+{% block script %}
+document.addEventListener('DOMContentLoaded', () => {
+    const wordInput = document.getElementById('wordInput');
+    const wordsContainer = document.getElementById('wordsContainer');
+
+    wordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const word = wordInput.value.trim();
+            if (word) {
+                addWord(word);
+                wordInput.value = '';
+            }
+        }
+    });
+
+    function addWord(word) {
+        const wordItem = document.createElement('div');
+        wordItem.className = 'word-item';
+
+        const wordText = document.createElement('span');
+        wordText.textContent = word;
+
+        const removeBtn = document.createElement('span');
+        removeBtn.className = 'remove';
+        removeBtn.textContent = 'x';
+        removeBtn.addEventListener('click', () => {
+            wordsContainer.removeChild(wordItem);
+        });
+
+        wordItem.appendChild(wordText);
+        wordItem.appendChild(removeBtn);
+        wordsContainer.appendChild(wordItem);
+    }
+});
+{% endblock %}
+{% block content %}
+	<div class="form_wrapper">
+    	<div class="form_container">
+    		<div class="title_container">
+				<h2>Parâmetros da busca</h2>
+			</div>
+    		<div class="row clearfix">
+      			<div class="">
+      				<form action="/process_file" method="post" enctype="multipart/form-data">
+						<div class="form_label">
+        					Palavras-chave:
+        				</div>
+						<input type="text" id="wordInput" placeholder="Digite uma palavra e pressione Enter">
+        				<div id="wordsContainer"></div>
+						<div class="form_label" style="padding-top:30px">
+        					Itens de busca:
+        				</div>
+          				<div class="input_field checkbox_option">
+            				<input type="checkbox" name="selected_fields" id="formacao" value="formacao">
+    						<label for="formacao">Formação</label>
+            			</div>
+          				<input class="button" type="submit" value="Gerar relatório" />
+    				</form>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+{% endblock %}

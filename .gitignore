@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.DS_Store
+*.db
 
 # C extensions
 *.so
@@ -13,7 +15,9 @@ develop-eggs/
 dist/
 downloads/
 eggs/
+.idea/
 .eggs/
+.venv/
 lib/
 lib64/
 parts/

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+
+	<link href="{{url_for('static', filename='img/favicon.png')}}" rel="icon">
+    <link href="{{url_for('static', filename='img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+
+	<!-- Template Main CSS File -->
+    <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <script>
+    {% block script %}{% endblock %}
+    </script>
+</head>
+<body>
+    <div class="container">
+    	<img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do IFG">
+    	<h1><a href="/">{% block cabecalho %}{% endblock %}</a></h1>
+    	<div id="content">
+    		{% block content %}{% endblock %}
+    	</div>
+    	<div class="credit">
+			<img src="{{ url_for('static', filename='img/criar.png') }}">
+			<p>Desenvolvido por Raphael Gomes (<a href="mailto:raphael.gomes@ifg.edu.br">raphael.gomes@ifg.edu.br</a>)</p>
+    	</div>
+	</div>
+</body>
+</html>
