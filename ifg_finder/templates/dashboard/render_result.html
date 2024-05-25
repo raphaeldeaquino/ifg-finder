@@ -1,0 +1,89 @@
+<div class="row clearfix">
+    <div class="col_half">
+        <canvas id="{{ chart }}"></canvas>
+    </div>
+    <div class="col_half">
+        {% for campus, data in result.items() %}
+        {% if data.pesquisadores %}
+        <h3 class="highlight">{{ campus }}</h3>
+        <table class="list_researchers">
+            <thead>
+            <tr>
+                <th style="width:70%">Nome</th>
+                <th>Email</th>
+                <th>Lattes</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for pesquisador in data.pesquisadores %}
+            <tr>
+                <td style="width:70%">{{ pesquisador.nome }}</td>
+                <td>
+                    <a href="mailto:{{ pesquisador.email }}" class="icon-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ pesquisador.lattes }}" target="_blank" class="icon-link">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<script>
+var result_{{ chart }} = {{ result|tojson }};
+
+const labels_{{ chart }} = Object.keys(result_{{ chart }});
+const data_{{ chart }} = labels_{{ chart }}.map(label => result_{{ chart }}[label].total);
+
+// Configuração do gráfico
+var config_{{ chart }} = {
+    type: 'bar',
+    data: {
+        labels: labels_{{ chart }},
+        datasets: [{
+            data: data_{{ chart }},
+            backgroundColor: 'rgba(20, 180, 50, 0.8)',
+            borderColor: 'rgba(47, 158, 65, 1)',
+            borderWidth: 1,
+            label: "Pesquisadores",
+        }]
+    },
+    options: {
+        legend: {
+            display: false
+        },
+        tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                    return value.toFixed(2);
+                }
+            }
+        },
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Quantidade de pesquisadores'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Câmpus'
+                }
+            }
+        }
+    }
+};
+
+var ctx_{{ chart }} = document.getElementById("{{ chart }}");
+var myChart_{{ chart }} = new Chart(ctx_{{ chart }}, config_{{ chart }});
+</script>

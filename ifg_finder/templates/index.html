@@ -15,6 +15,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const wordInput = document.getElementById('wordInput');
     const wordsContainer = document.getElementById('wordsContainer');
+    const fileInput = document.getElementById('fileInput');
+    const loadFileButton = document.getElementById('loadFileButton');
+    const checkboxTodos = document.getElementById('todos');
+    const otherCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#todos)');
+    const form = document.querySelector('form');
+    const errorMessage = document.getElementById('error-message');
+    const hiddenKeywords = document.getElementById('hiddenKeywords');
 
     wordInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -25,6 +32,65 @@ document.addEventListener('DOMContentLoaded', () => {
                 wordInput.value = '';
             }
         }
+    });
+
+    loadFileButton.addEventListener('click', () => {
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                const words = text.split('\n').flatMap(line => {
+                    const columns = line.split(';');
+                    return [columns[0].trim()];
+                });
+                words.forEach(word => {
+                    if (word) {
+                        addWord(word);
+                    }
+                });
+            };
+            reader.readAsText(file);
+        }
+    });
+
+    checkboxTodos.addEventListener('change', () => {
+        otherCheckboxes.forEach(checkbox => {
+            checkbox.checked = checkboxTodos.checked;
+        });
+    });
+
+    form.addEventListener('submit', (e) => {
+        errorMessage.textContent = '';
+        const words = wordsContainer.getElementsByClassName('word-item');
+        const atLeastOneCheckbox = Array.from(otherCheckboxes).some(checkbox => checkbox.checked) || checkboxTodos.checked;
+
+        if (words.length === 0 || !atLeastOneCheckbox) {
+            e.preventDefault();
+            errorMessage.textContent = 'Por favor, adicione ao menos uma palavra e selecione ao menos uma opção.';
+        } else {
+            hiddenKeywords.value = Array.from(words).map(wordItem => wordItem.textContent.replace('x', '').trim()).join(';');
+
+            // Gerar um ID aleatório
+            var requestId = generateRandomId();
+
+            // Adicionar o ID ao formulário como um campo hidden
+            var form = document.getElementById('form-data');
+            var requestIdInput = document.createElement('input');
+            requestIdInput.type = 'hidden';
+            requestIdInput.name = 'requestId';
+            requestIdInput.value = requestId;
+            form.appendChild(requestIdInput);
+
+            var progressHidden = document.getElementById('progress_hidden');
+            progressHidden.style.display = 'block';
+
+            // Verificar o progresso a cada 5 segundos (5000 milissegundos)
+            verificarProgresso(requestId);
+            setInterval(function() {
+                verificarProgresso(requestId);
+            }, 5000);
+            }
     });
 
     function addWord(word) {
@@ -45,6 +111,26 @@ document.addEventListener('DOMContentLoaded', () => {
         wordItem.appendChild(removeBtn);
         wordsContainer.appendChild(wordItem);
     }
+
+    function verificarProgresso(requestId) {
+        fetch('/painel/progresso?requestId=' + requestId)
+      .then(response => {
+        response.json().then(data => {
+            var progressDiv = document.getElementById('progress');
+        console.log("Progresso: " + data["progress"]);
+        progressDiv.innerText = "Progresso: " + data["progress"];
+        })
+      })
+      .catch(error => console.error(error))
+    }
+
+    function generateRandomId() {
+        // Gera um ID aleatório usando a biblioteca uuid
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
 });
 {% endblock %}
 {% block content %}
@@ -55,20 +141,48 @@ document.addEventListener('DOMContentLoaded', () => {
 			</div>
     		<div class="row clearfix">
       			<div class="">
-      				<form action="/process_file" method="post" enctype="multipart/form-data">
+      				<form action="/painel" method="post" id="form-data" enctype="multipart/form-data">
 						<div class="form_label">
         					Palavras-chave:
         				</div>
 						<input type="text" id="wordInput" placeholder="Digite uma palavra e pressione Enter">
-        				<div id="wordsContainer"></div>
+                        <div class="form_label" style="padding-top:30px">
+                            Carregar arquivo CSV:
+                        </div>
+                        <div class="row clearfix">
+                                <div class="col_half">
+                                    <input type="file" id="fileInput" accept=".csv">
+                                </div>
+                                <div class="col_half">
+                                    <button type="button" id="loadFileButton">Carregar palavras do CSV</button>
+                                </div>
+                        </div>
+                        <div id="wordsContainer"></div>
 						<div class="form_label" style="padding-top:30px">
         					Itens de busca:
         				</div>
           				<div class="input_field checkbox_option">
+                            <input type="checkbox" name="selected_fields" id="todos" value="todos">
+    						<label for="todos">Todos</label>
             				<input type="checkbox" name="selected_fields" id="formacao" value="formacao">
     						<label for="formacao">Formação</label>
+                            <input type="checkbox" name="selected_fields" id="atuacao" value="atuacao">
+    						<label for="atuacao">Atuação</label>
+                            <input type="checkbox" name="selected_fields" id="banca" value="banca">
+    						<label for="banca">Bancas</label>
+                            <input type="checkbox" name="selected_fields" id="orientacao" value="orientacao">
+    						<label for="orientacao">Orientação</label>
+                            <input type="checkbox" name="selected_fields" id="registro" value="registro">
+    						<label for="registro">Registro de PI</label>
             			</div>
+                        <input type="hidden" name="keywords" id="hiddenKeywords">
           				<input class="button" type="submit" value="Gerar relatório" />
+                        <div id="error-message" class="error-message"></div>
+                        <div id="progress_hidden" style="display: none;">
+        					<div class="form_label">
+								<div id="progress"></div>
+            				</div>
+                        </div>
     				</form>
     			</div>
     		</div>

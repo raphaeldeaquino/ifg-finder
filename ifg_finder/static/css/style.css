@@ -4,6 +4,12 @@
     background-color: #f3f3f3
 }
 
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
         .title_container {
 			text-align: center;
 			padding-bottom: 15px;
@@ -30,7 +36,8 @@
 		}
 
 		.container {
-  			max-width: 900px;
+		    width: 1200px;
+  			max-width: 100%;
   			margin: 50px auto;
   			text-align: center;
 		}
@@ -92,7 +99,7 @@ a {
 
 		.form_wrapper {
 			 background: #fff;
-			 width: 900px;
+			 width: 1200px;
 			 max-width: 100%;
 			 box-sizing: border-box;
 			 padding: 25px;
@@ -118,6 +125,8 @@ a {
 			 font-size: 1.5em;
 			 line-height: 1.5em;
 			 margin: 0;
+			 padding-top: 50px;
+			 padding-bottom: 30px;
 		}
 
 		.form_wrapper .title_container {
@@ -492,6 +501,45 @@ a {
 				 opacity: 1;
 			}
 		}
+
+.form_container p {
+    text-align: left;
+}
+
+.form_container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.form_container td {
+    padding: 8px;
+    text-align: left;
+}
+
+.list_researchers table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.list_researchers th, .list_researchers td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.list_researchers th {
+    background-color: #f2f2f2;
+}
+
+.highlight {
+    background-color: #eaf7ea; /* Cor de fundo verde claro */
+}
+
+.icon-link {
+    text-decoration: none;
+    color: inherit; /* Para garantir que a cor do link seja a mesma do texto */
+}
+
 		 @media (max-width: 600px) {
 			 .form_wrapper .col_half {
 				 width: 100%;

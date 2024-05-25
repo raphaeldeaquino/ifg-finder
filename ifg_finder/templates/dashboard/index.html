@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+	IFG Finder
+{% endblock %}
+{% block cabecalho %}
+	IFG Finder
+{% endblock %}
+
+{% block content %}
+<section id="hero" class="services">
+      <div class="container">
+           <div class="form_wrapper">
+               <div class="form_container">
+                   <div class="title_container">
+                       <h2>Resultado da busca</h2>
+                   </div>
+                   <p style="padding-top:20px"><b>Palavras-chave:</b></p>
+                   <table>
+                       {% for i in range(0, keywords|length, 5) %}
+                       <tr>
+                           {% for keyword in keywords[i:i+5] %}
+                           <td>{{ keyword }}</td>
+                           {% endfor %}
+                       </tr>
+                       {% endfor %}
+                   </table>
+                   {% if result_education %}
+                   <h2>Formação</h2>
+                   {% with result=result_education, chart='education' %}
+                   {% include 'dashboard/render_result.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result_acting %}
+                   <h2>Atuação</h2>
+                   {% with result=result_acting, chart='acting' %}
+                   {% include 'dashboard/render_result.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result_jury %}
+                   <h2>Bancas</h2>
+                   {% with result=result_jury, chart='jury' %}
+                   {% include 'dashboard/render_result.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result_advisor %}
+                   <h2>Orientação</h2>
+                   {% with result=result_advisor, chart='advisor' %}
+                   {% include 'dashboard/render_result.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result_register %}
+                   <h2>Registro de Propriedade Intelectual</h2>
+                   {% with result=result_register, chart='register' %}
+                   {% include 'dashboard/render_result.html' %}
+                   {% endwith %}
+                   {% endif %}
+               </div>
+           </div>
+      </div>
+</section>
+{% endblock %}
