@@ -1,4 +1,5 @@
 Flask~=3.0.3
 requests~=2.32.2
-spacy~=3.7.4
+spacy~=3.4.0
+gunicorn==22.0.0
 pt_core_news_md @ https://github.com/explosion/spacy-models/releases/download/pt_core_news_md-3.4.0/pt_core_news_md-3.4.0.tar.gz
