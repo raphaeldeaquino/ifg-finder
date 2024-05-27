@@ -6,10 +6,10 @@
   </style>
 {% endblock %}
 {% block title %}
-	IFG Finder
+	IFG Scholar Finder
 {% endblock %}
 {% block cabecalho %}
-	IFG Finder
+	IFG Scholar Finder
 {% endblock %}
 {% block script %}
 document.addEventListener('DOMContentLoaded', () => {
@@ -165,18 +165,72 @@ document.addEventListener('DOMContentLoaded', () => {
         					Itens de busca:
         				</div>
           				<div class="input_field checkbox_option">
-                            <input type="checkbox" name="selected_fields" id="todos" value="todos">
-    						<label for="todos">Todos</label>
-            				<input type="checkbox" name="selected_fields" id="formacao" value="formacao">
-    						<label for="formacao">Formação</label>
-                            <input type="checkbox" name="selected_fields" id="atuacao" value="atuacao">
-    						<label for="atuacao">Atuação</label>
-                            <input type="checkbox" name="selected_fields" id="banca" value="banca">
-    						<label for="banca">Bancas</label>
-                            <input type="checkbox" name="selected_fields" id="orientacao" value="orientacao">
-    						<label for="orientacao">Orientação</label>
-                            <input type="checkbox" name="selected_fields" id="registro" value="registro">
-    						<label for="registro">Registro de PI</label>
+                            <table>
+                                <tr>
+                                    <td colspan="5">
+                                        <input type="checkbox" name="selected_fields" id="todos" value="todos">
+                                        <label for="todos">Todos</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="formacao" value="formacao">
+                                        <label for="formacao">Formação</label>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="atuacao" value="atuacao">
+                                        <label for="atuacao">Atuação</label>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="banca" value="banca">
+                                        <label for="banca">Bancas</label>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="orientacao" value="orientacao">
+                                        <label for="orientacao">Orientação</label>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="registro" value="registro">
+                                        <label for="registro">Registro de PI</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="projetos" value="projetos">
+                                        <label for="projetos">Projetos</label>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="artigos" value="artigos">
+                                        <label for="artigos">Artigos completos</label>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="resumos" value="resumos">
+                                        <label for="resumos">Resumos</label>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="livros" value="livros">
+                                        <label for="livros">Livros</label>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="capitulos" value="capitulos">
+                                        <label for="capitulos">Capítulos de livros</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="eventos" value="eventos">
+                                        <label for="eventos">Participação em eventos</label>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="eventos2" value="eventos2">
+                                        <label for="eventos2">Trabalhos em eventos</label>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="selected_fields" id="tecnicas" value="tecnicas">
+                                        <label for="tecnicas">Produções técnicas</label>
+                                    </td>
+                                </tr>
+                            </table>
             			</div>
                         <input type="hidden" name="keywords" id="hiddenKeywords">
           				<input class="button" type="submit" value="Gerar relatório" />

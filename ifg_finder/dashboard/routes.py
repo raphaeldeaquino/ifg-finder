@@ -249,6 +249,18 @@ def index():
 
         result = query_api2(keywords, request_id, cont_researchers, cont_campus)
 
+        if 'banca' not in selected_fields:
+            del result['Bancas']
+
+        if 'orientacao' not in selected_fields:
+            del result['Orientações']
+
+        if 'projetos' not in selected_fields:
+            del result['Projetos de Pesquisa']
+
+        if 'artigos' not in selected_fields:
+            del result['Artigo']
+
         sorted_items = sorted(cont_researchers.items(), key=lambda item: item[1], reverse=True)
         top_10_researchers = sorted_items[:10]
         top_10_researchers = dict(top_10_researchers)
