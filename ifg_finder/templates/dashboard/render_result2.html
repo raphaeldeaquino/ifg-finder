@@ -37,29 +37,31 @@
     {% for campus, data in result.items() %}
     {% if data.pesquisadores %}
     <h3 class="highlight">{{ campus }}</h3>
-    <table class="list_researchers">
+    <table class="list_researchers2">
         <thead>
         <tr>
-            <th>Nome</th>
+            <th>Produção</th>
+            <th>Pesquisador(a)</th>
             <th>Email</th>
             <th>Lattes</th>
         </tr>
         </thead>
         <tbody>
-        {% for pesquisador in data.pesquisadores %}
+        {% for i in range(data.pesquisadores|length) %}
         <tr>
-            <td>{{ pesquisador.nome }}</td>
+            <td>{{ data.producoes[i] }}</td>
+            <td>{{ data.pesquisadores[i].nome }}</td>
             <td>
-                <a href="mailto:{{ pesquisador.email }}" class="icon-link">
+                <a href="mailto:{{ data.pesquisadores[i].email }}" class="icon-link">
                     <i class="fas fa-envelope"></i>
                 </a>
-                {{ pesquisador.email }}
+                {{ data.pesquisadores[i].email }}
             </td>
             <td>
-                <a href="{{ pesquisador.lattes }}" target="_blank" class="icon-link">
+                <a href="{{ data.pesquisadores[i].lattes }}" target="_blank" class="icon-link">
                     <i class="fas fa-external-link-alt"></i>
                 </a>
-                {{ pesquisador.lattes }}
+                {{ data.pesquisadores[i].lattes }}
             </td>
         </tr>
         {% endfor %}

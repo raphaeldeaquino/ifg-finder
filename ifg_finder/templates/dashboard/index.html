@@ -12,7 +12,7 @@
            <div class="form_wrapper">
                <div class="form_container">
                    <div class="title_container">
-                       <h2>Resultado da busca</h2>
+                       <h1>Resultado da busca</h1>
                    </div>
                    <p style="padding-top:20px"><b>Palavras-chave:</b></p>
                    <table>
@@ -24,6 +24,52 @@
                        </tr>
                        {% endfor %}
                    </table>
+                   <div class="row clearfix">
+                       <h2>Top 10 câmpus</h2>
+                        <table class="list_researchers2">
+                            <thead>
+                            <tr>
+                                <th>Produções</th>
+                                <th>Câmpus</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for campus, data in top_10_campus.items() %}
+                            <tr>
+                                <td>{{ data }}</td>
+                                <td>{{ campus }}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                   <div class="row clearfix">
+                        <h2>Top 10 pesquisadores</h2>
+                        <table class="list_researchers2">
+                            <thead>
+                            <tr>
+                                <th>Produções</th>
+                                <th>Pesquisador(a)</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for name, data in top_10_researchers.items() %}
+                            <tr>
+                                <td>{{ data }}</td>
+                                <td>{{ name }}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                    {% if result_education %}
                    <h2>Formação</h2>
                    {% with result=result_education, chart='education' %}
@@ -52,6 +98,91 @@
                    <h2>Registro de Propriedade Intelectual</h2>
                    {% with result=result_register, chart='register' %}
                    {% include 'dashboard/render_result.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   <h1>Detalhamento do resultado</h1>
+                   {% if result['Formação Acadêmica'] %}
+                   <h2>Formação Acadêmica</h2>
+                   {% with result=result['Formação Acadêmica'], chart='formacao2' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Areas de Atuacao'] %}
+                   <h2>Áreas de Atuação</h2>
+                   {% with result=result['Areas de Atuacao'], chart='atuacao2' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Bancas'] %}
+                   <h2>Bancas</h2>
+                   {% with result=result['Bancas'], chart='bancas2' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Orientações'] %}
+                   <h2>Orientações</h2>
+                   {% with result=result['Orientações'], chart='orientacoes2' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Projetos de Pesquisa'] %}
+                   <h2>Projetos de Pesquisa</h2>
+                   {% with result=result['Projetos de Pesquisa'], chart='projetos' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Artigo'] %}
+                   <h2>Artigos</h2>
+                   {% with result=result['Artigo'], chart='artigos' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Participação em evento'] %}
+                   <h2>Participação em Eventos</h2>
+                   {% with result=result['Participação em evento'], chart='eventos' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Produção Técnica'] %}
+                   <h2>Produções Técnicas</h2>
+                   {% with result=result['Produção Técnica'], chart='tecnicas' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Resumo'] %}
+                   <h2>Resumos</h2>
+                   {% with result=result['Resumo'], chart='resumos' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Capítulo de livro'] %}
+                   <h2>Capítulos de livro</h2>
+                   {% with result=result['Capítulo de livro'], chart='capitulos' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Trabalho em Evento'] %}
+                   <h2>Trabalhos em Evento</h2>
+                   {% with result=result['Trabalho em Evento'], chart='eventos2' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Livro Publicado'] %}
+                   <h2>Livros</h2>
+                   {% with result=result['Livro Publicado'], chart='livros' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Patentes'] %}
+                   <h2>Patentes</h2>
+                   {% with result=result['Patentes'], chart='patentes' %}
+                   {% include 'dashboard/render_result2.html' %}
+                   {% endwith %}
+                   {% endif %}
+                   {% if result['Outras Produções'] %}
+                   <h2>Outras Produções</h2>
+                   {% with result=result['Outras Produções'], chart='outras' %}
+                   {% include 'dashboard/render_result2.html' %}
                    {% endwith %}
                    {% endif %}
                </div>

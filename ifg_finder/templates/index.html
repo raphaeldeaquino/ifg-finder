@@ -151,7 +151,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <div class="row clearfix">
                                 <div class="col_half">
-                                    <input type="file" id="fileInput" accept=".csv">
+                                    <div class="input_field">
+                                        <span><i aria-hidden="true" class="fa-solid fa-file-csv"></i></span>
+                                        <input type="file" id="fileInput" accept=".csv">
+                                    </div>
                                 </div>
                                 <div class="col_half">
                                     <button type="button" id="loadFileButton">Carregar palavras do CSV</button>

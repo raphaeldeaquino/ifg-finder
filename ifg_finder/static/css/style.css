@@ -121,6 +121,14 @@ a {
 			 opacity: 0;
 		}
 
+		.form_wrapper h1 {
+			 font-size: 2.0em;
+			 line-height: 2.0em;
+			 margin: 0;
+			 padding-top: 50px;
+			 padding-bottom: 30px;
+		}
+
 		.form_wrapper h2 {
 			 font-size: 1.5em;
 			 line-height: 1.5em;
@@ -529,6 +537,68 @@ a {
 
 .list_researchers th {
     background-color: #f2f2f2;
+}
+
+.list_researchers td {
+    width: 33.33%;
+}
+
+.list_researchers2 table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.list_researchers2 th, .list_researchers2 td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.list_researchers2 th {
+    background-color: #f2f2f2;
+}
+
+.list_researchers2 td {
+    width: 25%;
+}
+
+.list_counts table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+     margin-top: 130px;
+}
+
+.list_counts td {
+    padding: 10px;
+    text-align: center;
+}
+
+.list_counts th {
+    background-color: #f2f2f2;
+    height: 150px; /* Ajuste a altura conforme necessário */
+    white-space: nowrap; /* Garante que o texto não quebre */
+    padding: 0;
+    text-align: left;
+}
+
+.rotate {
+  /* FF3.5+ */
+  -moz-transform: rotate(-90.0deg);
+  /* Opera 10.5 */
+  -o-transform: rotate(-90.0deg);
+  /* Saf3.1+, Chrome */
+  -webkit-transform: rotate(-90.0deg);
+  /* IE6,IE7 */
+  filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.083);
+  /* IE8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)";
+  /* Standard */
+  transform: rotate(-90.0deg);
+  position: absolute;
+  transform-origin: bottom left;
+    white-space: nowrap; /* Garante que o texto não quebre */
+    overflow: visible;
 }
 
 .highlight {
